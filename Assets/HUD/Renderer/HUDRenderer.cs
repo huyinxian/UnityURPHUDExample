@@ -9,11 +9,11 @@ namespace HUD
     public class HUDRenderer
     {
         /// <summary>
-        /// 所有的HUDMesh
+        /// 存储所有的HUDMesh，如果HUDMesh不存在于validList，那么该HUDMesh就是缓存下来的空闲对象
         /// </summary>
         private BetterList<HUDMesh> _meshList = new BetterList<HUDMesh>();
         /// <summary>
-        /// 有效的HUDMesh
+        /// 正在执行渲染的HUDMesh
         /// </summary>
         private BetterList<HUDMesh> _validList = new BetterList<HUDMesh>();
 
@@ -102,6 +102,7 @@ namespace HUD
                         (oldGeometrySize == 0 && curGeometrySize != 0))
                         _isDirty = true;
 
+                    // 如果HUDMesh中已经没有数据了，那么就将其从渲染队列中移除掉
                     if (curGeometrySize == 0)
                     {
                         _validList.RemoveAt(i);
