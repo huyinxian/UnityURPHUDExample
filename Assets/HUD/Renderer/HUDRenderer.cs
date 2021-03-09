@@ -33,14 +33,14 @@ namespace HUD
 
         public HUDMesh GetOrCreateMesh(string atlasName)
         {
-            // 先查找有效的HUDMesh
+            // 先查找正在渲染的HUDMesh中有没有使用这个图集
             for (int i = _validList.size - 1; i >= 0; i--)
             {
                 if (_validList[i].AtlasName == atlasName)
                     return _validList[i];
             }
             
-            // 查找所有的HUDMesh
+            // 如果没有，那么就从所有已创建的HUDMesh中查找
             for (int i = _meshList.size - 1; i >= 0; i--)
             {
                 if (_meshList[i].AtlasName == atlasName)
